@@ -42,7 +42,7 @@ pipeline {
                 script {
                     def scannerHome = tool 'SonarQube Scanner';//def scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                     withSonarQubeEnv('Sonar Server') {
-					sh "${scannerHome}/bin/sonar-scanner mvn sonar:sonar -Dsonar.projectKey=feature-SAST -Dsonar.host.url=http://localhost:9000 -Dsonar.login=d12c6ed446b3398e4baaa9abea6f3ca12cef6f5b"
+					sh "${scannerHome}/bin/sonar-scanner mvn sonar:sonar -Dsonar.projectKey=feature-SAST -Dsonar.host.url=http://localhost:9000 -Dsonar.login=af347ad8dea1be37a8d1b41b533b7cb7b77e3522"
                     }
                 }
            }
