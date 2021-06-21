@@ -18,7 +18,7 @@ pipeline {
             }
         }
         stage ('Compile') {
-            steps 
+            steps {
 			  echo '========================================='
               echo '                COMPILE '
               echo '========================================='
