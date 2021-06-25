@@ -67,7 +67,7 @@ pipeline {
 						-Dsonar.login=b431658c54f322c6f35296a32546f31d66813057 \
 						-Dsonar.sources=src/main/java/ \
 						-Dsonar.java.binaries=target/classes \
-						-Dsonar sonar.dependencyCheck.xmlReportPath=${WORKSPACE}/dependency-check-report.xml \
+						-Dsonar.dependencyCheck.xmlReportPath=${WORKSPACE}/dependency-check-report.xml \
 						-Dsonar.dependencyCheck.jsonReportPath=${WORKSPACE}/dependency-check-report.json \
 						-Dsonar.dependencyCheck.htmlReportPath=${WORKSPACE}/dependency-check-report.html'''
                     }
