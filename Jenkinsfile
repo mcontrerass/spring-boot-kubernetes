@@ -49,7 +49,7 @@ pipeline {
                 echo '                SCA '
                 echo '========================================='
                 sh 'mvn org.owasp:dependency-check-maven:aggregate'
-                dependencyCheckPublisher failedNewCritical: 5, failedTotalCritical: 10, pattern: '/var/jenkins_home/workspace/tareas_4_y_5_feature-SAST-SCA/target/target/dependency-check-report.xml', unstableNewCritical: 3, unstableTotalCritical: 5
+                dependencyCheckPublisher failedNewCritical: 5, failedTotalCritical: 10, pattern: 'target/dependency-check-report.xml', unstableNewCritical: 3, unstableTotalCritical: 5
             }
         }
 		
