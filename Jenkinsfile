@@ -73,7 +73,7 @@ pipeline {
         	    figlet 'Owasp Zap DAST'
         		script{
         		    env.DOCKER = tool "Docker"
-					sh 'echo DOCKER = ${DOCKER}'
+					echo "DOCKER = ${DOCKER}"
         		    env.DOCKER_EXEC = "/bin/docker"
         		    env.TARGET = 'https://demo.testfire.net/'
         				    
