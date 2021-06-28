@@ -55,7 +55,7 @@ pipeline {
         }
 		
 		stage('SAST') {
-			steps{
+			steps {
 			    echo '========================================='
                 echo '                SAST '
                 echo '========================================='
@@ -69,11 +69,11 @@ pipeline {
 			}
         }
 		
-		stage('ZAP'){
-        	steps{
+		stage('ZAP') {
+        	steps {
         	    figlet 'Owasp Zap DAST'
-        		script{
-        		    env.DOCKER = tool 'Docker'
+        		script {
+        		    def env.DOCKER = tool 'Docker';
 					env.DOCKER_EXEC = "${DOCKER}/bin/docker"
 					echo "${DOCKER_EXEC}"
         		    env.TARGET = 'https://demo.testfire.net/'
@@ -82,15 +82,6 @@ pipeline {
         		    sh '${DOCKER_EXEC} pull owasp/zap2docker-stable'
                     sh '${DOCKER_EXEC} run --add-host="localhost:192.168.56.201" --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8080 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
                     sh '${DOCKER_EXEC} run --add-host="localhost:192.168.56.201" -v /home/vagrant/owasp-zap:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-baseline.py -t "https://demo.testfire.net/" -I -r zap_baseline_report2.html -l PASS'
-					
-					//Variables Docker
-                    env.DOCKER = tool "Docker"
-                    env.DOCKER_EXEC = "${DOCKER}/bin/docker"
-                    echo "${DOCKER_EXEC}"
-                    sh "${DOCKER_EXEC} rm -f zap2"
-                    sh "${DOCKER_EXEC} pull owasp/zap2docker-stable"
-                    sh '${DOCKER_EXEC} run --add-host="localhost:127.0.0.1" --rm -e LC_ALL=C.UTF-8 -e LANG=C.UTF-8 --name zap2 -u zap -p 8090:8090 -d owasp/zap2docker-stable zap.sh -daemon -port 8080 -host 0.0.0.0 -config api.disablekey=true'
-                    sh '${DOCKER_EXEC} run --add-host="localhost:127.0.0.1" -v /home/vagrant/owasp-zap:/zap/wrk/:rw --rm -i owasp/zap2docker-stable zap-full-scan.py -t "http://zero.webappsecurity.com" -I -r zap_baseline_report2.html -l PASS'
         		}
         	}
         }
