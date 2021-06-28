@@ -74,7 +74,7 @@ pipeline {
         		script{
         		    env.DOCKER = tool "Docker"
 					sh 'echo DOCKER = ${DOCKER}'
-        		    env.DOCKER_EXEC = "${DOCKER}/bin/docker"
+        		    env.DOCKER_EXEC = "/bin/docker"
         		    env.TARGET = 'https://demo.testfire.net/'
         				    
         		    sh '${DOCKER_EXEC} rm -f zap2'
