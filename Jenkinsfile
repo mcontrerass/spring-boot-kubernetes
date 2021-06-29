@@ -43,6 +43,16 @@ pipeline {
               sh 'mvn clean package'
             }
         }
+	    
+	stage ('SCA') {
+            steps {
+		echo '========================================='
+                echo '                SCA '
+                echo '========================================='
+                sh 'mvn org.owasp:dependency-check-maven:aggregate'
+                dependencyCheckPublisher failedNewCritical: 5, failedTotalCritical: 10, pattern: '**/dependency-check-report.xml', unstableNewCritical: 3, unstableTotalCritical: 5
+            }
+        }
 		
 		stage('ZAP') {
         	steps {
