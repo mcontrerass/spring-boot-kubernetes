@@ -77,7 +77,7 @@ pipeline {
 			keepAll: false,
 			reportDir: '/home/vagrant/owasp-zap',
 			reportFiles: 'zap_full_scan_report2.html',
-			reportName: ''HTML Report,
+			reportName: 'HTML Report',
 			reportTitles: ''])
 			archiveArtifacts artifacts: '/home/vagrant/owasp-zap/zap_full_scan_report2.html'
 			    
