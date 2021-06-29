@@ -79,7 +79,7 @@ pipeline {
 			reportFiles: 'zap_full_scan_report2.html',
 			reportName: 'HTML Report',
 			reportTitles: ''])
-			archiveArtifacts artifacts: '/var/jenkins_home/jobs/zap_full_scan_report2.html'
+			//archiveArtifacts artifacts: '/var/jenkins_home/jobs/zap_full_scan_report2.html'
 			    
 		}
 	    }
