@@ -68,6 +68,21 @@ pipeline {
         		}
         	}
         }
+	    
+	    stage('Publish') {
+		steps {
+			publishHTML ([
+			allowMissing: false,
+			alwaysLinkToLastBuild: false,
+			keepAll: false,
+			reportDir: '/home/vagrant/owasp-zap',
+			reportFiles: 'zap_full_scan_report2.html',
+			reportName: ''HTML Report,
+			reportTitles: ''])
+			archiveArtifacts artifacts: '/home/vagrant/owasp-zap/zap_full_scan_report2.html'
+			    
+		}
+	    }
 	}
 }
 	
