@@ -83,6 +83,21 @@ pipeline {
         		}
         	}
         }
+		
+		stage('Publish') {
+			steps {
+				publishHTML ([
+				allowMissing: false,
+				alwaysLinkToLastBuild: false,
+				keepAll: false,
+				reportDir: '/var/jenkins_home/jobs',
+				reportFiles: 'zap_full_scan_report2.html',
+				reportName: 'HTML Report',
+				reportTitles: ''])
+				//archiveArtifacts artifacts: '/var/jenkins_home/jobs/zap_full_scan_report2.pdf'
+					
+			}
+	    }
 	}
 }
 	
