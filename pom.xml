@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
 	<description>Demo project for Spring Boot + Kubernetes</description>
-
+	
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR4</spring-cloud.version>
@@ -61,7 +61,6 @@
 
 	</dependencies>
 
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -74,8 +73,6 @@
 		</dependencies>
 	</dependencyManagement>
 
-
-
 	<build>
 		<plugins>
 			<plugin>
@@ -84,5 +81,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
