@@ -44,7 +44,7 @@ pipeline {
             }
         }
 
-		stage ('SCA') {
+			stage ('SCA') {
             steps {
 			    echo '========================================='
                 echo '                SCA '
@@ -53,7 +53,7 @@ pipeline {
                 dependencyCheckPublisher failedNewCritical: 5, failedTotalCritical: 10, pattern: '**/dependency-check-report.xml', unstableNewCritical: 3, unstableTotalCritical: 5
             }
         }
-		
+
 		stage('SAST') {
 			steps {
 			    echo '========================================='
@@ -67,8 +67,8 @@ pipeline {
                     }
                 }
 			}
-        }
-		
+        }	
+	    
 		stage('ZAP') {
         	steps {
         	    figlet 'Owasp Zap DAST'
