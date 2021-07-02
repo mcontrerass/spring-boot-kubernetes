@@ -54,6 +54,7 @@ pipeline {
             }
         }
 		
+		/*
 		stage('SAST') {
 			steps {
 			    echo '========================================='
@@ -68,6 +69,7 @@ pipeline {
                 }
 			}
         }
+		*/
 		
 		stage('ZAP') {
         	steps {
