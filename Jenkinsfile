@@ -109,7 +109,7 @@ pipeline {
         			env.DOCKER_EXEC = "${DOCKER}/bin/docker"
 					
         			sh '${DOCKER_EXEC} pull aquasec/trivy:0.18.3'
-					sh '${DOCKER_EXEC} build -f /var/jenkins_home/workspace/tarea-DevSecOps_feature-ScanDocker/Dockerfile -t dockerfileimage . '
+					sh '${DOCKER_EXEC} build -f /var/jenkins_home/workspace/rea-DevSecOps_feature-ScanDocker/Dockerfile -t dockerfileimage . '
 					sh '${DOCKER_EXEC} run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /home/vagrant/owasp-zap:/root/.cache/  aquasec/trivy:0.18.3 dockerfileimage'
                     sh '''
                         ${DOCKER_EXEC} run --rm -v $(pwd):/root/.cache/ aquasec/trivy python:3.4-alpine
