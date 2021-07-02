@@ -44,6 +44,31 @@ pipeline {
             }
         }
 
+		stage ('SCA') {
+            steps {
+			    echo '========================================='
+                echo '                SCA '
+                echo '========================================='
+                sh 'mvn org.owasp:dependency-check-maven:aggregate'
+                dependencyCheckPublisher failedNewCritical: 5, failedTotalCritical: 10, pattern: '**/dependency-check-report.xml', unstableNewCritical: 3, unstableTotalCritical: 5
+            }
+        }
+		
+		stage('SAST') {
+			steps {
+			    echo '========================================='
+                echo '                SAST '
+                echo '========================================='
+				script {
+                    def scannerHome = tool 'SonarQube Scanner';//def scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    withSonarQubeEnv('Sonar Server') {
+						echo "ScannerHome: ${scannerHome}"
+						sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=feature-SAST-SCA -Dsonar.host.url=http://172.19.0.3:9000 -Dsonar.login=b431658c54f322c6f35296a32546f31d66813057 -Dsonar.sources=src/main/java/ -Dsonar.java.binaries=target/classes/ -Dsonar.dependencyCheck.xmlReportPath=target/dependency-check-report.xml -Dsonar.dependencyCheck.jsonReportPath=target/dependency-check-report.json -Dsonar.dependencyCheck.htmlReportPath=target/dependency-check-report.html"
+                    }
+                }
+			}
+        }
+		
 		stage('ZAP') {
         	steps {
         	    figlet 'Owasp Zap DAST'
@@ -58,6 +83,21 @@ pipeline {
         		}
         	}
         }
+		
+		stage('Publish') {
+			steps {
+				publishHTML ([
+				allowMissing: false,
+				alwaysLinkToLastBuild: false,
+				keepAll: false,
+				reportDir: '/var/jenkins_home/jobs',
+				reportFiles: 'zap_full_scan_report2.html',
+				reportName: 'HTML Report',
+				reportTitles: ''])
+				//archiveArtifacts artifacts: '/var/jenkins_home/jobs/zap_full_scan_report2.pdf'
+					
+			}
+	    }
 		
 		stage('Scan Docker'){
             steps {
@@ -77,22 +117,7 @@ pipeline {
     
                 }
             }
-        }
-	    
-	stage('Publish') {
-			steps {
-				publishHTML ([
-				allowMissing: false,
-				alwaysLinkToLastBuild: false,
-				keepAll: false,
-				reportDir: '/var/jenkins_home/jobs',
-				reportFiles: 'zap_full_scan_report2.html',
-				reportName: 'HTML Report',
-				reportTitles: ''])
-				//archiveArtifacts artifacts: '/var/jenkins_home/jobs/zap_full_scan_report2.pdf'
-					
-			}
-	    }
+        }	   
     }
 }
 	
